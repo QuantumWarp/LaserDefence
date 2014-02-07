@@ -14,13 +14,17 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="john_lowther.personal.laserdefence.MainMenuActivity"
+            android:name="john_lowther.personal.laserdefence.activities.MainMenuActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="john_lowther.personal.laserdefence.activities.FullScreenGameActivity"
+            android:label="@string/title_activity_full_screen_game" >
         </activity>
     </application>
 
