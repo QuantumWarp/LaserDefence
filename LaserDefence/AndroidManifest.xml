@@ -24,7 +24,8 @@
         </activity>
         <activity
             android:name="john_lowther.personal.laserdefence.activities.FullScreenGameActivity"
-            android:label="@string/title_activity_full_screen_game" >
+            android:label="@string/title_activity_full_screen_game" 
+            android:theme="@+styles/Fullscreen" >
         </activity>
     </application>
 

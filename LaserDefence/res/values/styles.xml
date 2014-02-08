@@ -16,5 +16,8 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+    
+    <!-- Style used for fullscreen activities -->
+    <style name="Fullscreen" parent="android:Theme.Black.NoTitleBar.Fullscreen" />
 
 </resources>

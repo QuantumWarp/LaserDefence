@@ -1,10 +1,15 @@
 package john_lowther.personal.laserdefence.activities;
 
 import john_lowther.personal.laserdefence.R;
-import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 
+/**
+ * Main menu of the application.
+ * @author John Lowther
+ */
 public class MainMenuActivity extends Activity {
 
 	@Override
@@ -12,12 +17,21 @@ public class MainMenuActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main_menu, menu);
-		return true;
+	
+	/**
+	 * Called on the menu button being clicked. Rederects to the appropriate page.
+	 * @param v - the button pressed
+	 */
+	public void onClick(View v) {
+		Intent intent = null;
+		
+		switch (v.getId()) {
+			case R.id.new_game:
+				intent = new Intent(this, FullScreenGameActivity.class);
+				break;
+		}
+		
+		startActivity(intent);
 	}
 
 }

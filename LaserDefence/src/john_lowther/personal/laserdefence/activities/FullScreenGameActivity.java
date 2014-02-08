@@ -3,8 +3,11 @@ package john_lowther.personal.laserdefence.activities;
 import john_lowther.personal.laserdefence.R;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 
+/**
+ * This is the main game screen. The user will play the game on this screen.
+ * @author John Lowther
+ */
 public class FullScreenGameActivity extends Activity {
 
 	@Override
@@ -13,11 +16,5 @@ public class FullScreenGameActivity extends Activity {
 		setContentView(R.layout.activity_full_screen_game);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.full_screen_game, menu);
-		return true;
-	}
 
 }
