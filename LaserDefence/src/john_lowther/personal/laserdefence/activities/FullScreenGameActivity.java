@@ -1,6 +1,8 @@
 package john_lowther.personal.laserdefence.activities;
 
 import john_lowther.personal.laserdefence.R;
+import john_lowther.personal.laserdefence.controllers.Controller;
+import john_lowther.personal.laserdefence.controllers.ControllerGame;
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -9,12 +11,14 @@ import android.os.Bundle;
  * @author John Lowther
  */
 public class FullScreenGameActivity extends Activity {
+	Controller controller = new ControllerGame();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_full_screen_game);
 		
+		controller.start();
 	}
 
 

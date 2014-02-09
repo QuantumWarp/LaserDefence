@@ -11,7 +11,7 @@ import john_lowther.personal.laserdefence.controllers.enums.ControllerGameEnums;
 public class ControllerGame extends Controller {
 
 	@Override
-	protected void switchMethod(ControllerEnums method) {
+	protected void switchMethod(ControllerEnums method, Object[] parameters) {
 		switch ((ControllerGameEnums) method) {
 		case NEW_GAME:
 			//TODO set up new game.

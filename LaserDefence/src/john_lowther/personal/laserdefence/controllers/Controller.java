@@ -1,5 +1,7 @@
 package john_lowther.personal.laserdefence.controllers;
 
+import java.util.LinkedList;
+
 import john_lowther.personal.laserdefence.controllers.enums.ControllerEnums;
 
 //TODO should eventually not allow the method and parameters to change when the
@@ -13,8 +15,9 @@ import john_lowther.personal.laserdefence.controllers.enums.ControllerEnums;
 public abstract class Controller implements Runnable {
 	private Thread controllerThread;
 	private boolean running;
-	private ControllerEnums method;
-	protected Object[] parameters;
+	private boolean methodsRunning = false;
+	private LinkedList<ControllerEnums> methodQueue = new LinkedList<ControllerEnums>();
+	protected LinkedList<Object[]> parametersQueue = new LinkedList<Object[]>();
 	
 	/**
 	 * Starts the controller. Stops the old controller if there is one. Creates a new thread.
@@ -47,30 +50,20 @@ public abstract class Controller implements Runnable {
 //================== Running Methods ==================//
 	
 	/**
-	 * Controller runs with the last specified method and parameters.
+	 * Emptys the queue of methods by running them.
+	 * If this method is already running this method is instantly returned.
 	 */
-	public void runCurrent() {
-		controllerThread.notify();
-	}
-	
-	/**
-	 * Controller runs with the last specified parameters and the input method.
-	 * @param method
-	 */
-	public void runMethod(ControllerEnums method) {
-		setMethod(method);
-		runCurrent();
-	}
-	
-	/**
-	 * Controller runs with the input method and parameters.
-	 * @param method
-	 * @param parameters
-	 */
-	public void runMethod(ControllerEnums method, Object... parameters) {
-		setParameters(parameters);
-		setMethod(method);
-		runCurrent();
+	public void runList() {
+		if (methodsRunning)
+			return;
+		
+		methodsRunning = true;
+		
+		while (!methodQueue.isEmpty()) {
+			controllerThread.notify();
+		}
+		
+		methodsRunning = false;
 	}
 	
 	@Override
@@ -82,7 +75,7 @@ public abstract class Controller implements Runnable {
 				return;
 			}
 			
-			switchMethod(method);
+			switchMethod(methodQueue.removeFirst(), parametersQueue.removeFirst());
 		}
 	}
 	
@@ -100,7 +93,7 @@ public abstract class Controller implements Runnable {
 	 * </pre>
 	 * @param method
 	 */
-	protected abstract void switchMethod(ControllerEnums method);
+	protected abstract void switchMethod(ControllerEnums method, Object[] parameters);
 	
 //================== Getters and Setters ==================//
 	
@@ -111,20 +104,24 @@ public abstract class Controller implements Runnable {
 	public boolean isRunning() {
 		return running;
 	}
-
+	
 	/**
-	 * Set the parameters to call with the next run.
-	 * @param parameters
+	 * Adds a method to the queue.
+	 * @param method
 	 */
-	public void setParameters(Object... parameters) {
-		this.parameters = parameters;
+	public void addMethod(ControllerEnums method) {
+		parametersQueue.addLast(null);
+		methodQueue.add(method);
+		runList();
 	}
 	
 	/**
-	 * Set the method to call on next run.
+	 * Adds a method to the queue.
 	 * @param method
 	 */
-	public void setMethod(ControllerEnums method) {
-		this.method = method;
+	public void addMethod(ControllerEnums method, Object... parameters) {
+		parametersQueue.addLast(parameters);
+		methodQueue.addLast(method);
+		runList();
 	}
 }
