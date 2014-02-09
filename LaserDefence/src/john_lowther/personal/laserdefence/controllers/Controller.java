@@ -2,6 +2,8 @@ package john_lowther.personal.laserdefence.controllers;
 
 import john_lowther.personal.laserdefence.controllers.enums.ControllerEnums;
 
+//TODO should eventually not allow the method and parameters to change when the
+//controller is in a run cycle so that a method is called with the wrong parameters.
 /**
  * This class provides the methods so that it can pass on jobs that it has been told
  * to perform via the use of enums. A class extending this should contain a switch
@@ -11,7 +13,7 @@ import john_lowther.personal.laserdefence.controllers.enums.ControllerEnums;
 public abstract class Controller implements Runnable {
 	private Thread controllerThread;
 	private boolean running;
-	protected ControllerEnums method;
+	private ControllerEnums method;
 	protected Object[] parameters;
 	
 	/**
@@ -71,8 +73,38 @@ public abstract class Controller implements Runnable {
 		runCurrent();
 	}
 	
+	@Override
+	public void run() {
+		while (running) {
+			try {
+				controllerThread.wait();
+			} catch (InterruptedException e) {
+				return;
+			}
+			
+			switchMethod(method);
+		}
+	}
+	
+	/**
+	 * This method is where all the possible cases are held based on which enums
+	 * the variable 'method' is cast to. Example below:
+	 *<pre>
+	 *	protected void switchMethod(ControllerEnums method) {
+	 *		switch ((ExampleGameEnums) method) {
+	 *		case EXAMPLE:
+	 *			//do stuff
+	 *			break;
+	 *		}
+	 *	}
+	 * </pre>
+	 * @param method
+	 */
+	protected abstract void switchMethod(ControllerEnums method);
+	
 //================== Getters and Setters ==================//
 	
+
 	/**
 	 * @return If the controller is currently running.
 	 */
