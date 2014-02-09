@@ -19,6 +19,13 @@ public class Timer implements Runnable {
 	private long ticksPerformed;
 	private long startTime;
 	
+	/**
+	 * If no parameter is given will default to tick intervals of 1 second.
+	 */
+	public Timer() {
+		setTickInterval(1000);
+	}
+	
 	public Timer(int tickInterval) {
 		setTickInterval(tickInterval);
 	}
@@ -69,7 +76,7 @@ public class Timer implements Runnable {
 	}
 	
 	/** 
-	 * Stops the timer. Can be used as a pause functionality
+	 * Stops the timer. Can be used as a pause functionality.
 	 */
 	public void stop() {
 		timerThread.interrupt();
