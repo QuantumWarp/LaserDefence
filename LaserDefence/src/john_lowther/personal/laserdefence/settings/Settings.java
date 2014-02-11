@@ -1,9 +1,11 @@
-package john_lowther.personal.laserdefence.gamemodel;
+package john_lowther.personal.laserdefence.settings;
 
 /**
  * A singleton class that contains the settings for the application.
  * @author John Lowther
  */
+//TODO maybe implement cloneable to create a snapshot of some of the settings so
+//that they cant change in-game.
 public class Settings {
 	private static Settings instance;
 	
@@ -21,9 +23,10 @@ public class Settings {
 		
 		return instance;
 	}
-	
+
 	public void resetToDefault() {
 		instance = new Settings();
 	}
+	
 	
 }

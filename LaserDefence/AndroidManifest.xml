@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
 
     <application
         android:allowBackup="true"
@@ -16,16 +16,21 @@
         <activity
             android:name="john_lowther.personal.laserdefence.activities.MainMenuActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="john_lowther.personal.laserdefence.activities.FullScreenGameActivity"
+            android:label="@string/title_activity_full_screen_game"
+            android:theme="@+styles/Fullscreen" >
+        </activity>
+        <activity
+            android:name="john_lowther.personal.laserdefence.activities.SplashActivity"
+            android:label="@string/title_activity_splash" 
+            android:theme="@+styles/FullscreenWithBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="john_lowther.personal.laserdefence.activities.FullScreenGameActivity"
-            android:label="@string/title_activity_full_screen_game" 
-            android:theme="@+styles/Fullscreen" >
         </activity>
     </application>
 

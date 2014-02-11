@@ -19,5 +19,8 @@
     
     <!-- Style used for fullscreen activities -->
     <style name="Fullscreen" parent="android:Theme.Black.NoTitleBar.Fullscreen" />
+    
+    <!-- Style used for fullscreen activities with info bar -->
+    <style name="FullscreenWithBar" parent="android:Theme.Black.NoTitleBar" />
 
 </resources>

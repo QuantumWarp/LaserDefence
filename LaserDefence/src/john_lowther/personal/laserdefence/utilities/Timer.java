@@ -82,11 +82,7 @@ public class Timer implements Runnable {
 		timerThread.interrupt();
 		running = false;
 		
-		try {
-			timerThread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		//TODO add efficient stopping method
 	}
 	
 	@Override

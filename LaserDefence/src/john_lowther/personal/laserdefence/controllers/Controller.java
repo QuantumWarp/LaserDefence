@@ -15,7 +15,7 @@ import john_lowther.personal.laserdefence.controllers.enums.ControllerEnums;
  * @author John Lowther
  */
 public abstract class Controller implements Runnable {
-	private Thread controllerThread;
+	private Thread controllerThread = new Thread(this);
 	private boolean running;
 	private LinkedList<ControllerEnums> methodQueue = new LinkedList<ControllerEnums>();
 	private LinkedList<Object[]> parametersQueue = new LinkedList<Object[]>();
@@ -55,7 +55,9 @@ public abstract class Controller implements Runnable {
 	public void run() {
 		while (running) {
 			try {
-				controllerThread.wait();
+				synchronized (controllerThread) {
+					controllerThread.wait();
+				}
 			} catch (InterruptedException e) {
 				return;
 			}
