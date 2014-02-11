@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 import john_lowther.personal.laserdefence.controllers.enums.ControllerEnums;
 
-//TODO should eventually not allow the method and parameters to change when the
-//controller is in a run cycle so that a method is called with the wrong parameters.
+//TODO should make sure the list is empty before waiting. There is a miniscule possibility for error.
+//Also speed has not been tested. This class must be extremly fast at processing a method.
 /**
  * This class provides the methods so that it can pass on jobs that it has been told
  * to perform via the use of enums. A class extending this should contain a switch
@@ -15,9 +15,9 @@ import john_lowther.personal.laserdefence.controllers.enums.ControllerEnums;
 public abstract class Controller implements Runnable {
 	private Thread controllerThread;
 	private boolean running;
-	private boolean methodsRunning = false;
 	private LinkedList<ControllerEnums> methodQueue = new LinkedList<ControllerEnums>();
-	protected LinkedList<Object[]> parametersQueue = new LinkedList<Object[]>();
+	private LinkedList<Object[]> parametersQueue = new LinkedList<Object[]>();
+	private LinkedList<Boolean> asyncQueue = new LinkedList<Boolean>();
 	
 	/**
 	 * Starts the controller. Stops the old controller if there is one. Creates a new thread.
@@ -48,24 +48,7 @@ public abstract class Controller implements Runnable {
 	}
 
 //================== Running Methods ==================//
-	
-	/**
-	 * Emptys the queue of methods by running them.
-	 * If this method is already running this method is instantly returned.
-	 */
-	public void runList() {
-		if (methodsRunning)
-			return;
 		
-		methodsRunning = true;
-		
-		while (!methodQueue.isEmpty()) {
-			controllerThread.notify();
-		}
-		
-		methodsRunning = false;
-	}
-	
 	@Override
 	public void run() {
 		while (running) {
@@ -75,8 +58,32 @@ public abstract class Controller implements Runnable {
 				return;
 			}
 			
-			switchMethod(methodQueue.removeFirst(), parametersQueue.removeFirst());
+			runList();
 		}
+	}
+	
+	/**
+	 * Emptys the queue of methods by running them.
+	 * If this method is already running this method is instantly returned.
+	 */
+	private void runList() {
+		while (!methodQueue.isEmpty()) {
+			runNextMethod();
+		}
+	}
+	
+	/**
+	 * Runs the next method either asyncronously or concurrently based on the asyncQueue.
+	 */
+	private void runNextMethod() {
+		if (asyncQueue.removeLast())
+			new Thread(new Runnable() {
+				public void run() {
+					switchMethod(methodQueue.removeFirst(), parametersQueue.removeFirst());
+				}
+			});
+		else
+			switchMethod(methodQueue.removeFirst(), parametersQueue.removeFirst());
 	}
 	
 	/**
@@ -110,18 +117,38 @@ public abstract class Controller implements Runnable {
 	 * @param method
 	 */
 	public void addMethod(ControllerEnums method) {
-		parametersQueue.addLast(null);
-		methodQueue.add(method);
-		runList();
+		addMethod(method, false, new Object[]{ null });
 	}
 	
 	/**
-	 * Adds a method to the queue.
+	 * Adds a method to the queue. Can also set parameters.
 	 * @param method
+	 * @param parameters
 	 */
 	public void addMethod(ControllerEnums method, Object... parameters) {
+		addMethod(method, false, parameters);
+	}
+
+	/**
+	 * Adds a method to the queue. Can set if method will run asynchronously.
+	 * @param method
+	 * @param async
+	 */
+	public void addMethod(ControllerEnums method, boolean async) {
+		addMethod(method, async, new Object[]{ null });
+	}
+	
+	/**
+	 * Adds a method to the queue. Can set if method will run asynchronously.
+	 * Can also set parameters.
+	 * @param method
+	 * @param async
+	 * @param parameters
+	 */
+	public void addMethod(ControllerEnums method, boolean async, Object... parameters) {
 		parametersQueue.addLast(parameters);
+		asyncQueue.addLast(async);
 		methodQueue.addLast(method);
-		runList();
+		controllerThread.notify();
 	}
 }
