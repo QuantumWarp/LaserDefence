@@ -4,8 +4,10 @@ import java.util.LinkedList;
 
 import john_lowther.personal.laserdefence.controllers.enums.ControllerEnums;
 
-//TODO should make sure the list is empty before waiting. There is a miniscule possibility for error.
-//Also speed has not been tested. This class must be extremly fast at processing a method.
+/* TODO should make sure the list is empty before waiting. There is a miniscule possibility for error.
+   Also speed has not been tested. This class must be extremly fast at processing a method.
+   Also maybe add functionality to allow async methods to be called immediately even if a
+   concurrent method is already being evaluated. */
 /**
  * This class provides the methods so that it can pass on jobs that it has been told
  * to perform via the use of enums. A class extending this should contain a switch

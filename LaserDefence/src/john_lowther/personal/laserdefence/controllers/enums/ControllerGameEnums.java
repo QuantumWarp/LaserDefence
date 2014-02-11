@@ -5,5 +5,5 @@ package john_lowther.personal.laserdefence.controllers.enums;
  * @author John Lowther
  */
 public enum ControllerGameEnums implements ControllerEnums {
-	NEW_GAME, PAUSE, UNPAUSE
+	NEW_GAME, PAUSE, UNPAUSE, CLEANUP_ACTIVITY
 }

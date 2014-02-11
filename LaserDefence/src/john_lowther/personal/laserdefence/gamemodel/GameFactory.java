@@ -1,13 +1,15 @@
 package john_lowther.personal.laserdefence.gamemodel;
 
 /**
- * Produces game objects based on settings.
+ * Produces game objects based on settings. Only one public method.
+ * This class is used to avoid clutter in other classes.
  * @author John Lowther
  */
 public class GameFactory {
+	Settings settings;
 	
 	/**
-	 * Only has one method to create game object.
+	 * Creates game object.
 	 * @param settings
 	 * @return game
 	 */
