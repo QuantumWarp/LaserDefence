@@ -20,12 +20,12 @@
         <activity
             android:name="john_lowther.personal.laserdefence.activities.FullScreenGameActivity"
             android:label="@string/title_activity_full_screen_game"
-            android:theme="@+styles/Fullscreen" >
+    		android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
         </activity>
         <activity
             android:name="john_lowther.personal.laserdefence.activities.SplashActivity"
             android:label="@string/title_activity_splash" 
-            android:theme="@+styles/FullscreenWithBar" >
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -41,12 +41,6 @@ public abstract class Controller implements Runnable {
 	public void stop() {
 		controllerThread.interrupt();
 		running = false;
-		
-		try {
-			controllerThread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
 //================== Running Methods ==================//
@@ -153,6 +147,9 @@ public abstract class Controller implements Runnable {
 		parametersQueue.addLast(parameters);
 		asyncQueue.addLast(async);
 		methodQueue.addLast(method);
-		controllerThread.notify();
+		
+		synchronized (controllerThread) {
+			controllerThread.notify();
+		}
 	}
 }

@@ -45,7 +45,7 @@ public class ControllerGame extends Controller {
 	 */
 	private void newGame() {
 		game = new GameFactory().getNewGame();
-		renderer = new Renderer(0,0); //TODO (0,0) should be replaced with the screen size.
+		renderer = new Renderer(1, 1); //TODO (1, 1) should be replaced with the screen size.
 		
 		rendererTimer = new Timer();
 		gameTimer = new Timer();
