@@ -41,6 +41,8 @@ public abstract class Controller implements Runnable {
 	public void stop() {
 		controllerThread.interrupt();
 		running = false;
+		
+		//TODO add efficient stopping method
 	}
 
 //================== Running Methods ==================//
