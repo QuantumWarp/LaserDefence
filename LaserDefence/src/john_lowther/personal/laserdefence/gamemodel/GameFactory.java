@@ -1,5 +1,6 @@
 package john_lowther.personal.laserdefence.gamemodel;
 
+import john_lowther.personal.laserdefence.gamemodel.interfaces.Factory;
 import john_lowther.personal.laserdefence.settings.Settings;
 
 /**
@@ -7,7 +8,7 @@ import john_lowther.personal.laserdefence.settings.Settings;
  * This class is used to avoid clutter in other classes.
  * @author John Lowther
  */
-public class GameFactory {
+public class GameFactory implements Factory {
 	Settings settings = Settings.getInstance();
 	
 	/**
