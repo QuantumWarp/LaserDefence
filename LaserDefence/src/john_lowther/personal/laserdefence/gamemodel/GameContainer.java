@@ -9,18 +9,33 @@ import john_lowther.personal.laserdefence.gamemodel.missiles.MissileContainer;
 import john_lowther.personal.laserdefence.gamemodel.shields.ShieldContainer;
 import john_lowther.personal.laserdefence.utilities.Tickable;
 
+//TODO make sure that creatign a new game doesn't called exceptions if currently ticking.
 /**
  * Class that is essentially just a POJO for all the subobjects of Game.
  * Has one useful method, tick.
  * @author John Lowther
  */
 public class GameContainer implements Tickable, Container {
-	private MissileContainer missiles;
-	private LaserContainer lasers;
-	private BaseContainer bases;
-	private FieldContainer fields; 
-	private ExplosionContainer explosions;
-	private ShieldContainer shields;
+	private static GameContainer instance;
+	private MissileContainer missiles = new MissileContainer();
+	private LaserContainer lasers = new LaserContainer();
+	private BaseContainer bases = new BaseContainer();
+	private FieldContainer fields = new FieldContainer(); 
+	private ExplosionContainer explosions = new ExplosionContainer();
+	private ShieldContainer shields = new ShieldContainer();
+	
+	public GameContainer(){
+		instance = new GameContainer();
+	}
+	
+	/**
+	 * Static way of getting the current GameContainer so that it can be accessed from anywhere in 
+	 * the model
+	 * @return current GameContainer
+	 */
+	public static GameContainer getInstance() {
+		return instance;
+	}
 	
 	/**
 	 * If no user input is done, this will be the sole method that will be called

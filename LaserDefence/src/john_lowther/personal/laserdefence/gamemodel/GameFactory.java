@@ -19,6 +19,8 @@ public class GameFactory implements Factory {
 	public GameContainer getNewGame() {
 		GameContainer game = new GameContainer();
 		
+		
+		
 		return game;
 	}
 }
