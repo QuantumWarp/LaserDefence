@@ -3,7 +3,7 @@ package john_lowther.personal.laserdefence.controllers;
 import john_lowther.personal.laserdefence.commands.CommandTick;
 import john_lowther.personal.laserdefence.controllers.enums.ControllerEnums;
 import john_lowther.personal.laserdefence.controllers.enums.ControllerGameEnums;
-import john_lowther.personal.laserdefence.gamemodel.Game;
+import john_lowther.personal.laserdefence.gamemodel.GameContainer;
 import john_lowther.personal.laserdefence.gamemodel.GameFactory;
 import john_lowther.personal.laserdefence.rendering.Renderer;
 import john_lowther.personal.laserdefence.utilities.Timer;
@@ -15,7 +15,7 @@ import john_lowther.personal.laserdefence.utilities.Timer;
  */
 public class ControllerGame extends Controller {
 	private Renderer renderer;
-	private Game game;
+	private GameContainer game;
 	private Timer rendererTimer, gameTimer;
 	
 	@Override

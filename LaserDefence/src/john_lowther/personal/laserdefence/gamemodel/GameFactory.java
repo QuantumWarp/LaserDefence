@@ -16,8 +16,8 @@ public class GameFactory implements Factory {
 	 * @param settings
 	 * @return game
 	 */
-	public Game getNewGame() {
-		Game game = new Game();
+	public GameContainer getNewGame() {
+		GameContainer game = new GameContainer();
 		
 		return game;
 	}
