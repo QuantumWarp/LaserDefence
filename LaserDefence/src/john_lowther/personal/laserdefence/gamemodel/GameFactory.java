@@ -17,7 +17,7 @@ public class GameFactory implements Factory {
 	 * @return game
 	 */
 	public GameContainer getNewGame() {
-		GameContainer game = new GameContainer();
+		GameContainer game = GameContainer.getNewInstance();
 		
 		
 		

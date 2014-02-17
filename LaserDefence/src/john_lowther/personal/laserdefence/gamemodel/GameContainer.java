@@ -24,8 +24,8 @@ public class GameContainer implements Tickable, Container {
 	private ExplosionContainer explosions = new ExplosionContainer();
 	private ShieldContainer shields = new ShieldContainer();
 	
-	public GameContainer(){
-		instance = new GameContainer();
+	private GameContainer(){
+		
 	}
 	
 	/**
@@ -34,6 +34,19 @@ public class GameContainer implements Tickable, Container {
 	 * @return current GameContainer
 	 */
 	public static GameContainer getInstance() {
+		if (instance == null) {
+			instance = new GameContainer();
+		}
+		
+		return instance;
+	}
+	
+	/**
+	 * Gets a new GameContainer.
+	 * @return new GameContainer
+	 */
+	public static GameContainer getNewInstance() {
+		instance = new GameContainer();
 		return instance;
 	}
 	
@@ -49,40 +62,40 @@ public class GameContainer implements Tickable, Container {
 	
 //================== Getters and Setters ==================//
 
-	public MissileContainer getMissiles() {
-		return missiles;
+	public static MissileContainer getMissiles() {
+		return instance.missiles;
 	}
 
 	public void setMissiles(MissileContainer missiles) {
 		this.missiles = missiles;
 	}
 
-	public LaserContainer getLasers() {
-		return lasers;
+	public static LaserContainer getLasers() {
+		return instance.lasers;
 	}
 
 	public void setLasers(LaserContainer lasers) {
 		this.lasers = lasers;
 	}
 
-	public BaseContainer getBases() {
-		return bases;
+	public static BaseContainer getBases() {
+		return instance.bases;
 	}
 
 	public void setBases(BaseContainer bases) {
 		this.bases = bases;
 	}
 
-	public FieldContainer getFields() {
-		return fields;
+	public static FieldContainer getFields() {
+		return instance.fields;
 	}
 
 	public void setFields(FieldContainer fields) {
 		this.fields = fields;
 	}
 
-	public ExplosionContainer getExplosions() {
-		return explosions;
+	public static ExplosionContainer getExplosions() {
+		return instance.explosions;
 	}
 
 	public void setExplosions(ExplosionContainer explosions) {
@@ -90,13 +103,12 @@ public class GameContainer implements Tickable, Container {
 	}
 
 	
-	public ShieldContainer getShields() {
-		return shields;
+	public static ShieldContainer getShields() {
+		return instance.shields;
 	}
 
 	
 	public void setShields(ShieldContainer shields) {
 		this.shields = shields;
 	}
-
 }
