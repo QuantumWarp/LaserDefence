@@ -4,9 +4,4 @@ import john_lowther.personal.laserdefence.gamemodel.missiles.modules.MovementMod
 
 public class Straight extends MovementModule {
 
-	@Override
-	public void move() {
-		
-	}
-
 }

@@ -17,12 +17,12 @@ import john_lowther.personal.laserdefence.utilities.Tickable;
  */
 public class GameContainer implements Tickable, Container {
 	private static GameContainer instance;
-	private MissileContainer missiles = new MissileContainer();
-	private LaserContainer lasers = new LaserContainer();
-	private BaseContainer bases = new BaseContainer();
-	private FieldContainer fields = new FieldContainer(); 
-	private ExplosionContainer explosions = new ExplosionContainer();
-	private ShieldContainer shields = new ShieldContainer();
+	private MissileContainer missiles;
+	private LaserContainer lasers;
+	private BaseContainer bases;
+	private FieldContainer fields; 
+	private ExplosionContainer explosions;
+	private ShieldContainer shields;
 	
 	private GameContainer(){
 		
@@ -56,7 +56,6 @@ public class GameContainer implements Tickable, Container {
 	 */
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -101,12 +100,10 @@ public class GameContainer implements Tickable, Container {
 	public void setExplosions(ExplosionContainer explosions) {
 		this.explosions = explosions;
 	}
-
 	
 	public static ShieldContainer getShields() {
 		return instance.shields;
 	}
-
 	
 	public void setShields(ShieldContainer shields) {
 		this.shields = shields;
