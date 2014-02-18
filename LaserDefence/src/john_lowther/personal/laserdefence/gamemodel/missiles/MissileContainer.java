@@ -25,4 +25,20 @@ public class MissileContainer implements Container {
 	public int missileCount() {
 		return missiles.size();
 	}
+	
+	/**
+	 * Add missile to the array.
+	 * @param missile
+	 */
+	public void addMissile(Missile missile) {
+		missiles.add(missile);
+	}
+	
+	/**
+	 * Remove missile from array.
+	 * @param missile
+	 */
+	public void removeMissile(Missile missile) {
+		missiles.remove(missile);
+	}
 }
