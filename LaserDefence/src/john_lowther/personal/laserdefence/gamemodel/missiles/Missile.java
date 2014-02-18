@@ -6,54 +6,110 @@ import john_lowther.personal.laserdefence.gamemodel.interfaces.Drawable;
 import john_lowther.personal.laserdefence.gamemodel.interfaces.Killable;
 import john_lowther.personal.laserdefence.gamemodel.interfaces.Movable;
 import john_lowther.personal.laserdefence.gamemodel.interfaces.TrailProducer;
-import john_lowther.personal.laserdefence.gamemodel.missiles.modules.Death;
+import john_lowther.personal.laserdefence.gamemodel.missiles.modules.DamageModule;
+import john_lowther.personal.laserdefence.gamemodel.missiles.modules.DeathModule;
 import john_lowther.personal.laserdefence.gamemodel.missiles.modules.FieldModule;
-import john_lowther.personal.laserdefence.gamemodel.missiles.modules.Movement;
+import john_lowther.personal.laserdefence.gamemodel.missiles.modules.MovementModule;
 import john_lowther.personal.laserdefence.gamemodel.missiles.modules.ShieldModule;
-import john_lowther.personal.laserdefence.gamemodel.missiles.modules.Teleport;
-import john_lowther.personal.laserdefence.utilities.Variable2D;
+import john_lowther.personal.laserdefence.gamemodel.missiles.modules.TeleportModule;
 
 /**
  * The represents a single missile.
  * @author John Lowther
  */
-public abstract class Missile implements TrailProducer, Drawable, Killable, Damagable, Movable, Collidable {
-	private Variable2D origin;
-	private Variable2D position;
-	private Variable2D acceleration;
-	
+public class Missile implements TrailProducer, Drawable, Killable, Damagable, Movable, Collidable {
 //Mandatory modules
-	private Movement movement;
-	private Death death;
+	private MovementModule movementModule;
+	private DeathModule deathModule;
 	
 //Optional Modules
-	private Teleport teleport;
-	private ShieldModule shield;
-	private FieldModule field;
+	private TeleportModule teleportModule;
+	private ShieldModule shieldModule;
+	private FieldModule fieldModule;
+	private DamageModule damageModule;
+
+	@Override
+	public void collide(Object o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void move() {
+		movementModule.move();
+		
+		if (teleportModule != null)
+			teleportModule.runModule();
+	}
+
+	@Override
+	public void damage(Object o, int amount) {
+		if (damageModule == null) {
+			die(o);
+			return;
+		}
+		
+		damageModule.damage(o, amount);
+	}
+
+	@Override
+	public void die(Object o) {
+		deathModule.die(o);
+	}
+
+	@Override
+	public void addToTrail() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 //================== Getters and Setters ==================//
 	
-	public Variable2D getOrigin() {
-		return origin;
+	public MovementModule getMovement() {
+		return movementModule;
 	}
 	
-	public void setOrigin(Variable2D origin) {
-		this.origin = origin;
+	public void setMovement(MovementModule movement) {
+		this.movementModule = movement;
 	}
 	
-	public Variable2D getPosition() {
-		return position;
+	public DeathModule getDeath() {
+		return deathModule;
 	}
 	
-	public void setPosition(Variable2D position) {
-		this.position = position;
+	public void setDeath(DeathModule death) {
+		this.deathModule = death;
 	}
 	
-	public Variable2D getAcceleration() {
-		return acceleration;
+	public TeleportModule getTeleport() {
+		return teleportModule;
 	}
 	
-	public void setAcceleration(Variable2D acceleration) {
-		this.acceleration = acceleration;
+	public void setTeleport(TeleportModule teleport) {
+		this.teleportModule = teleport;
+	}
+	
+	public ShieldModule getShield() {
+		return shieldModule;
+	}
+	
+	public void setShield(ShieldModule shield) {
+		this.shieldModule = shield;
+	}
+	
+	public FieldModule getField() {
+		return fieldModule;
+	}
+	
+	public void setField(FieldModule field) {
+		this.fieldModule = field;
+	}
+
+	public DamageModule getDamage() {
+		return damageModule;
+	}
+
+	public void setDamage(DamageModule damage) {
+		this.damageModule = damage;
 	}
 }

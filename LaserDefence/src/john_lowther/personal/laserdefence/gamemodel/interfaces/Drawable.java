@@ -7,9 +7,9 @@ package john_lowther.personal.laserdefence.gamemodel.interfaces;
  */
 public interface Drawable {
 	
-	/**
-	 * The method called to draw the object.
-	 * @author John Lowther
-	 */
-	public void draw();
+//	/**
+//	 * The method called to draw the object.
+//	 * @author John Lowther
+//	 */
+//	public void draw();
 }
