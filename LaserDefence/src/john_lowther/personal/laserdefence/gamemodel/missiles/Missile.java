@@ -10,6 +10,7 @@ import john_lowther.personal.laserdefence.gamemodel.missiles.modules.DamageModul
 import john_lowther.personal.laserdefence.gamemodel.missiles.modules.DeathModule;
 import john_lowther.personal.laserdefence.gamemodel.missiles.modules.FieldModule;
 import john_lowther.personal.laserdefence.gamemodel.missiles.modules.MovementModule;
+import john_lowther.personal.laserdefence.gamemodel.missiles.modules.RewardModule;
 import john_lowther.personal.laserdefence.gamemodel.missiles.modules.ShieldModule;
 import john_lowther.personal.laserdefence.gamemodel.missiles.modules.TeleportModule;
 
@@ -27,6 +28,7 @@ public class Missile implements TrailProducer, Drawable, Killable, Damagable, Mo
 	private ShieldModule shieldModule;
 	private FieldModule fieldModule;
 	private DamageModule damageModule;
+	private RewardModule rewardModule;
 
 	@Override
 	public void collide(Object o) {
@@ -111,5 +113,15 @@ public class Missile implements TrailProducer, Drawable, Killable, Damagable, Mo
 
 	public void setDamage(DamageModule damage) {
 		this.damageModule = damage;
+	}
+
+	
+	public RewardModule getRewardModule() {
+		return rewardModule;
+	}
+	
+
+	public void setRewardModule(RewardModule rewardModule) {
+		this.rewardModule = rewardModule;
 	}
 }
