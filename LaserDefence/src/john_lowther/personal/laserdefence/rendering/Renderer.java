@@ -4,23 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import john_lowther.personal.laserdefence.utilities.Tickable;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 
 /**
  * Renders all subrenderers and renders the composite bitmap onto a SurfaceView.
+ * Extends Subrenderer to allow for renderers to be stacked.
  * @author John Lowther
  */
-public class Renderer implements Tickable {
+public class Renderer extends Subrenderer implements Tickable {
+
+	public Renderer(int width, int height) {
+		super(width, height);
+	}
+	
+	public Renderer(int width, int height, int positionX, int positionY) {
+		super(width, height, positionX, positionY);
+	}
+
 	private List<Subrenderer> subrendererList = new ArrayList<Subrenderer>();
 	//TODO Add priority of subrenderers. For now subrenderers are added in the appropriate order.
-	private Bitmap bitmap;
-	private Canvas canvas;
-	
-	public Renderer(int width, int height) {
-		bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-		canvas = new Canvas(bitmap);
-	}
 	
 	/**
 	 * Adds the specified subrenderer.

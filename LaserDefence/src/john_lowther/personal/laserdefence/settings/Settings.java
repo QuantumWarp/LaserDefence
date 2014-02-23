@@ -30,6 +30,8 @@ public class Settings {
 	}
 
 	
+//================== Getters and Setters ==================//
+	
 	public GameSettings getGameSettings() {
 		return gameSettings;
 	}

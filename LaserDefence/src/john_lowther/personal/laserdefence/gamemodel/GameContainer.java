@@ -35,7 +35,7 @@ public class GameContainer implements Tickable, Container {
 	
 	/**
 	 * Static way of getting the current GameContainer so that it can be accessed from anywhere in 
-	 * the model
+	 * the model.
 	 * @return current GameContainer
 	 */
 	public static GameContainer getInstance() {
@@ -74,7 +74,7 @@ public class GameContainer implements Tickable, Container {
 	
 //================== Getters and Setters ==================//
 
-	public static MissileContainer getMissiles() {
+	public MissileContainer getMissiles() {
 		return instance.missiles;
 	}
 
@@ -82,7 +82,7 @@ public class GameContainer implements Tickable, Container {
 		this.missiles = missiles;
 	}
 
-	public static LaserContainer getLasers() {
+	public LaserContainer getLasers() {
 		return instance.lasers;
 	}
 
@@ -90,7 +90,7 @@ public class GameContainer implements Tickable, Container {
 		this.lasers = lasers;
 	}
 
-	public static BaseContainer getBases() {
+	public BaseContainer getBases() {
 		return instance.bases;
 	}
 
@@ -98,7 +98,7 @@ public class GameContainer implements Tickable, Container {
 		this.bases = bases;
 	}
 
-	public static FieldContainer getFields() {
+	public FieldContainer getFields() {
 		return instance.fields;
 	}
 
@@ -106,7 +106,7 @@ public class GameContainer implements Tickable, Container {
 		this.fields = fields;
 	}
 
-	public static ExplosionContainer getExplosions() {
+	public ExplosionContainer getExplosions() {
 		return instance.explosions;
 	}
 
@@ -114,7 +114,7 @@ public class GameContainer implements Tickable, Container {
 		this.explosions = explosions;
 	}
 	
-	public static ShieldContainer getShields() {
+	public ShieldContainer getShields() {
 		return instance.shields;
 	}
 	
