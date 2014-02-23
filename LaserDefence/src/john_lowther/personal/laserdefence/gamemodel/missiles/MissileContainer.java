@@ -11,19 +11,15 @@ import john_lowther.personal.laserdefence.settings.Settings;
  * @author John Lowther
  */
 public class MissileContainer implements Container {
-	//private int maxNumberOfMissiles;
-	//private double spawnProbability;
+	private int maxNumberOfMissiles;
+	private double spawnProbability;
+	private int missilesDestroyed = 0;
+	private int missilesActive = 0;
+	
 	private ArrayList<Missile> missiles = new ArrayList<Missile>();
 	
 	public MissileContainer(Settings settings) {
 		// TODO Auto-generated constructor stub
-	}
-	
-	/**
-	 * @return number of alive missiles
-	 */
-	public int missileCount() {
-		return missiles.size();
 	}
 	
 	/**
@@ -40,5 +36,46 @@ public class MissileContainer implements Container {
 	 */
 	public void removeMissile(Missile missile) {
 		missiles.remove(missile);
+		MissileDestroyed();
+	}
+	
+	/**
+	 * Increments the missiles destroyed count.
+	 */
+	public void MissileDestroyed() {
+		this.missilesDestroyed++;
+		this.missilesActive--;
+	}
+
+
+//================== Getters and Setters ==================//
+		
+	public int getMaxNumberOfMissiles() {
+		return maxNumberOfMissiles;
+	}
+	
+
+	public void setMaxNumberOfMissiles(int maxNumberOfMissiles) {
+		this.maxNumberOfMissiles = maxNumberOfMissiles;
+	}
+
+
+	public double getSpawnProbability() {
+		return spawnProbability;
+	}
+	
+
+
+	public void setSpawnProbability(double spawnProbability) {
+		this.spawnProbability = spawnProbability;
+	}
+
+	
+	public int getMissilesDestroyed() {
+		return missilesDestroyed;
+	}
+
+	public int getMissilesActive() {
+		return missilesActive;
 	}
 }

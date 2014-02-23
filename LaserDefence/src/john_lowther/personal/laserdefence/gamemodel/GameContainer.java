@@ -17,12 +17,17 @@ import john_lowther.personal.laserdefence.utilities.Tickable;
  */
 public class GameContainer implements Tickable, Container {
 	private static GameContainer instance;
+	
+//Sub containers.
 	private MissileContainer missiles;
 	private LaserContainer lasers;
 	private BaseContainer bases;
 	private FieldContainer fields; 
 	private ExplosionContainer explosions;
 	private ShieldContainer shields;
+	
+//Game values.
+	private int score;
 	
 	private GameContainer(){
 		
@@ -57,6 +62,14 @@ public class GameContainer implements Tickable, Container {
 	@Override
 	public void tick() {
 		
+	}
+	
+	/**
+	 * Adds a value to the score. Negative number to subtract.
+	 * @param number
+	 */
+	public void addToScore(int number) {
+		score += number;
 	}
 	
 //================== Getters and Setters ==================//
@@ -107,5 +120,9 @@ public class GameContainer implements Tickable, Container {
 	
 	public void setShields(ShieldContainer shields) {
 		this.shields = shields;
+	}
+
+	public int getScore() {
+		return score;
 	}
 }

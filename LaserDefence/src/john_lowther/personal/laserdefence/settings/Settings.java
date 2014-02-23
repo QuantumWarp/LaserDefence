@@ -8,6 +8,7 @@ package john_lowther.personal.laserdefence.settings;
 //that they cant change in-game.
 public class Settings {
 	private static Settings instance;
+	private GameSettings gameSettings;
 	
 	/**
 	 * Default settings should be applied here.
@@ -26,6 +27,16 @@ public class Settings {
 
 	public void resetToDefault() {
 		instance = new Settings();
+	}
+
+	
+	public GameSettings getGameSettings() {
+		return gameSettings;
+	}
+	
+
+	public void setGameSettings(GameSettings gameSettings) {
+		this.gameSettings = gameSettings;
 	}
 	
 	
