@@ -3,15 +3,14 @@ package john_lowther.personal.laserdefence.rendering;
 import java.util.ArrayList;
 import java.util.List;
 
-import john_lowther.personal.laserdefence.utilities.Tickable;
+import android.graphics.Canvas;
 
 /**
- * Renders all subrenderers and renders the composite bitmap onto a SurfaceView.
- * Extends Subrenderer to allow for renderers to be stacked.
+ * Renders all subrenderers and renders the composite bitmap.
  * @author John Lowther
  */
-public class Renderer extends Subrenderer implements Tickable {
-
+public class Renderer extends Subrenderer {
+	
 	public Renderer(int width, int height) {
 		super(width, height);
 	}
@@ -39,40 +38,12 @@ public class Renderer extends Subrenderer implements Tickable {
 		subrendererList.remove(subrenderer);
 	}
 
-	@Override
-	public void tick() {
-		render();
-		submitBitmap();
-		//TODO implement ticker too fast checks.
-	}
-	
-	/**
-	 * Submits the bitmap first to keep the framrate steady.
-	 */
-	private void submitBitmap() {
-		
-	}
-
 	/**
 	 * Renders all the subrenderers.
 	 */
-	public void render() {
+	public void render(Canvas canvas) {
 		for (Subrenderer subrenderer : subrendererList) {
-			drawSubrenderer(subrenderer);
+			subrenderer.render(canvas);
 		}
 	}
-	
-	/**
-	 * Renders a single Subrenderer.
-	 * @param subrenderer
-	 */
-	private void drawSubrenderer(Subrenderer subrenderer) {
-		canvas.drawBitmap(subrenderer.getBitmap(),
-				subrenderer.getPositionX(),
-				subrenderer.getPositionY(),
-				null);
-	}
-
-	
-
 }

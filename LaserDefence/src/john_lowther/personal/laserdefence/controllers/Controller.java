@@ -3,6 +3,7 @@ package john_lowther.personal.laserdefence.controllers;
 import java.util.LinkedList;
 
 import john_lowther.personal.laserdefence.controllers.enums.ControllerEnums;
+import android.util.Log;
 
 /* TODO should make sure the list is empty before waiting. There is a miniscule possibility for error.
    Also speed has not been tested. This class must be extremly fast at processing a method.
@@ -28,11 +29,19 @@ public abstract class Controller implements Runnable {
 	 */
 	public void start() {
 		if (controllerThread.isAlive())
-			stop();
-		
-		controllerThread = new Thread(this);
-		running = true;
-		controllerThread.start();
+				stop();
+
+			controllerThread = new Thread(this);
+
+		synchronized(controllerThread) {
+			controllerThread.start();
+			
+			try {
+				controllerThread.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/** 
@@ -49,19 +58,26 @@ public abstract class Controller implements Runnable {
 		
 	@Override
 	public void run() {
+		synchronized (controllerThread) {
+			running = true;
+
+			controllerThread.notify();
+		}
+
 		while (running) {
 			try {
 				synchronized (controllerThread) {
 					controllerThread.wait();
+
 				}
 			} catch (InterruptedException e) {
 				return;
 			}
-			
+
 			runList();
 		}
 	}
-	
+
 	/**
 	 * Emptys the queue of methods by running them.
 	 * If this method is already running this method is instantly returned.
@@ -153,5 +169,6 @@ public abstract class Controller implements Runnable {
 		synchronized (controllerThread) {
 			controllerThread.notify();
 		}
+		Log.d("added", method.toString());
 	}
 }

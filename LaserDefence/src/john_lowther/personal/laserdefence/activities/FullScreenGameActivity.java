@@ -1,11 +1,11 @@
 package john_lowther.personal.laserdefence.activities;
 
-import john_lowther.personal.laserdefence.R;
 import john_lowther.personal.laserdefence.controllers.Controller;
 import john_lowther.personal.laserdefence.controllers.ControllerGame;
 import john_lowther.personal.laserdefence.controllers.enums.ControllerGameEnums;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.SurfaceView;
 
 /**
  * This is the main game screen. The user will play the game on this screen.
@@ -17,10 +17,13 @@ public class FullScreenGameActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_full_screen_game);
-		
+		SurfaceView gameSurfaceView = new SurfaceView(this);
+		setContentView(gameSurfaceView);
+
 		controller.start();
-		controller.addMethod(ControllerGameEnums.NEW_GAME);
+		controller.addMethod(ControllerGameEnums.NEW_GAME, 
+				this.getBaseContext(), 
+				gameSurfaceView);
 	}
 	
 	@Override

@@ -1,9 +1,11 @@
 package john_lowther.personal.laserdefence.rendering;
 
 import john_lowther.personal.laserdefence.gamemodel.GameContainer;
+import john_lowther.personal.laserdefence.rendering.specific.MissileRenderer;
 import android.content.Context;
 import android.graphics.Point;
 import android.view.Display;
+import android.view.SurfaceView;
 import android.view.WindowManager;
 
 /**
@@ -12,7 +14,7 @@ import android.view.WindowManager;
  * @author John Lowther
  */
 public class RendererLinker {
-	private Point screenSize;
+	private Point screenSize = new Point();
 	
 	@SuppressWarnings("deprecation")
 	public RendererLinker(Context context) {
@@ -31,10 +33,14 @@ public class RendererLinker {
 	 * @param game
 	 * @param renderer
 	 */
-	public void setUpRenderers(GameContainer game, Renderer renderer) {
+	public SurfaceViewRenderer setUpRenderers(GameContainer game, SurfaceView surfaceView) {
+		SurfaceViewRenderer renderer = new SurfaceViewRenderer(surfaceView, screenSize.x, screenSize.y);
+		
 		MissileRenderer missileRenderer = new MissileRenderer(screenSize.x, screenSize.y);
 		missileRenderer.setGame(game);
 		
 		renderer.addSubrenderer(missileRenderer);
+		
+		return renderer;	
 	}
 }

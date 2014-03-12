@@ -1,6 +1,5 @@
 package john_lowther.personal.laserdefence.rendering;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 /**
@@ -8,17 +7,16 @@ import android.graphics.Canvas;
  * @author John Lowther
  */
 public abstract class Subrenderer {
-	private Bitmap bitmap;
-	protected Canvas canvas;
 	private int positionX, positionY;
+	protected int width, height;
 	
 	public Subrenderer(int width, int height) {
 		this(width, height, 0, 0);
 	}
 	
 	public Subrenderer(int width, int height, int positionX, int positionY) {
-		bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-		canvas = new Canvas(bitmap);
+		this.width = width;
+		this.height = height;
 		this.setPositionX(positionX);
 		this.setPositionY(positionY);
 	}
@@ -26,16 +24,9 @@ public abstract class Subrenderer {
 	/**
 	 * All drawing onto this subrenderer's canvas should be done here.
 	 */
-	public abstract void render();
+	public abstract void render(Canvas canvas);
 
 //================== Getters and Setters ==================//
-	
-	/**
-	 * @return The image that this subrenderer handles
-	 */
-	public Bitmap getBitmap() {
-		return bitmap;
-	}
 	
 	public int getPositionX() {
 		return positionX;

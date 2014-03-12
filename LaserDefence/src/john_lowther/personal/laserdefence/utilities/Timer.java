@@ -51,10 +51,7 @@ public class Timer implements Runnable {
 	 * Calls the execute method for all commands registered.
 	 */
 	public void executeCommands() {
-		for (Command command : commandList)
-			command.execute();
-		
-		ticksPerformed++;
+		commandList.get(0).execute();
 	}
 	
 //================== State methods ==================//
